@@ -51,17 +51,17 @@ void loop()  {
   // ASSUME: That the Arduino can keep up with the serial data arriving thereby we won't get an overflow
   // TODO: Insert delay in sending?
   while (Serial.available() >= 6) {
-    read = Serial.readString(); // Reads the buffer as string until null terminator is found
+    read = Serial.readStringUntil('\0'); // Reads the buffer as string until null terminator is found
 
     // Process string (split and convert to ints)
     steerVal = (read.substring(0,3)).toInt();
     thrustVal = (read.substring(3,6)).toInt();
     
     // DEBUG: Write back serial values
-    Serial.print("Steer: ");
-    Serial.println(steerVal);
-    Serial.print("Thrust: ");
-    Serial.println(thrustVal);
+//    Serial.print("Steer: ");
+//    Serial.println(steerVal);
+//    Serial.print("Thrust: ");
+//    Serial.println(thrustVal);
     
     // Write servo - by having it inside this loop - only writing once for each command
     steer.write(steerVal);
