@@ -13,14 +13,14 @@ ser = serial.Serial('/dev/cu.usbmodem1421', 115200)  # open first serial port
 print ser.portstr       # check which port was really used
 
 # Definie value limits
-maxSteer = 130
-minSteer = 45
-normSteer = 90
+maxSteer = 174
+minSteer = 78
+normSteer = 127
 
-maxThrust = 130
-minThrust = 75
+# maxThrust = 169
+# minThrust = 70
 
-stepSize = 10
+stepSize = 1
 
 # Set initial
 steer = minSteer
@@ -48,8 +48,9 @@ while (1):
 		if (steer < 10):
 			steerStr = '0' + steerStr
 
-	print steerStr + '0' + str(minThrust) + '\0'
+	print steerStr + '0' + str(minSteer) + '\0'
 
-	ser.write( steerStr + '0' + str(minThrust) + '\0')
+	# ser.write( '0' + str(minSteer) + steerStr + '\0' )
+	ser.write( steerStr + '0' + str(minThrust) + '\0' )
 
-	time.sleep(0.05) # 50ms
+	time.sleep(0.01) # 10ms
